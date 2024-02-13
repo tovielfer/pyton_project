@@ -1,11 +1,13 @@
 import pandas as pd
+import datetime
 
 
 class FileOperation:
 
     def __init__(self):
-       pass
-    def  read_csv(self, file_path: str):
+        pass
+
+    def read_csv(self, file_path: str):
         try:
             data = pd.read_csv(file_path)
             return data
@@ -13,7 +15,6 @@ class FileOperation:
             print("File not found.")
             return None
 
-#27 שמירה ל csv
     def save_to_csv(self, data, file_name: str):
         try:
             data.to_csv(file_name, index=False)
@@ -21,4 +22,13 @@ class FileOperation:
         except Exception as e:
             print(f"Error saving data: {e}")
 
+    def read_file(self, path):
+        try:
+            with open(path, 'r') as file:
+                return file.read()
+        except Exception as e:
+            self.error(e)
 
+    def error(self, err):
+        print("<{0},{1},{2},type error: {3}<{0}>".format("Tovi", datetime.datetime.now().strftime("%d.%m.%y"),
+                                                         datetime.datetime.now().strftime("%H:%M"), err))
